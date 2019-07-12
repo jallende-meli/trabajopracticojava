@@ -7,7 +7,7 @@ public class Item implements Comparable<Item> {
         LISTING_TYPE_DES;
     }
 
-//    public ORDER order = ORDER.PRICE_ASC;
+    public ORDER order = ORDER.PRICE_ASC;
 
     private String id;
     private String site_id;
@@ -18,6 +18,12 @@ public class Item implements Comparable<Item> {
     private String stop_time;
     private String thumbnail;
     private String[] tags;
+
+    public Item(String id, String site_id, String title, float price, String currency_id,
+                String listing_type_id, String stop_time, String thumbnail, String[] tags) {
+        super();
+
+    }
 
     public String getId() {
         return id;
@@ -91,9 +97,12 @@ public class Item implements Comparable<Item> {
         this.tags = tags;
     }
 
-
-    @Override
     public int compareTo(Item item) {
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        return this.title;
     }
 }

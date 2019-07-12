@@ -2,16 +2,14 @@ import java.util.Collection;
 
 public interface ItemService {
 
-    public Collection<Item> getCollection(String key);
-    public void setCollection(String key, Collection<Item> collection);
-
-    public Collection<Item> getOrderItems(String order);
+    public boolean collectionExist(String collection);
+    public Item[] getCollection(String key);
+    public void setCollection(String key, Item[] collection);
 
     /** CRUD to items of collection **/
-    public void addItemToCollection(Item item);
-    public Item getItem(String id);
-    public Item editItem(Item integrante) throws Exception;
-    public void deleteItem(String id);
+    public void addItemToCollection(String collection, Item item);
+    public Item getItemOfCollection(String collection, String id);
+    public Item editItemOfCollection(String collection, Item integrante) throws Exception;
+    public void deleteItemOfCollection(String collection, String id);
 
-    public boolean itemExist(String search);
 }
