@@ -1,6 +1,7 @@
 import com.google.gson.*;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -10,14 +11,18 @@ import java.util.Comparator;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Consummer {
-    private static ItemServiceMapImpl itemsService = new ItemServiceMapImpl();
-    private static CurrencyService currencyService = new CurrencyService();
+    private static ItemServiceMapImpl itemsService;
+    private static CurrencyService currencyService;
     private static Gson gson = new Gson();
+
+    public Consummer (ItemServiceMapImpl itemsService, CurrencyService currencyService){
+        this.itemsService = itemsService;
+        this.currencyService = currencyService;
+    }
 
     public Item getItemFromCollection(String collection, String id) throws ItemException, CollectionException{
       try {
           Item[] itemsCollection = getCollectionFromStr(collection, null, null, false);
-          System.out.println(itemsCollection.length);
           return Arrays.stream(itemsCollection)
                   .filter(s -> s.getId().equals(id))
                   .findFirst()
@@ -28,7 +33,8 @@ public class Consummer {
       }
     }
 
-    public Item[] getCollectionFromStr(String collection, String order, String price_range, Boolean good_quality_thumbnail) throws Exception {
+    public Item[] getCollectionFromStr(String collection, String order, String price_range,
+                                       Boolean good_quality_thumbnail) throws CollectionException, IOException {
         Item[] items;
 
         if (itemsService.collectionExist(collection)) {
@@ -56,7 +62,9 @@ public class Consummer {
     };
 
 
-    public String[] getTitlesOfCollectionFromStr(String collection, String order, String price_range, Boolean good_quality_thumbnail) throws Exception {
+    public String[] getTitlesOfCollectionFromStr(String collection, String order, String price_range,
+                                                 Boolean good_quality_thumbnail) throws CollectionException,
+            IOException {
         Item[] items = this.getCollectionFromStr(collection, order, price_range, good_quality_thumbnail);
         String[] titles = new String[items.length];
         for (int i = 0; i < items.length; i++) {
@@ -77,7 +85,7 @@ public class Consummer {
 
     }
 
-    private Item[] searchItemsOnApi(String item) throws Exception{
+    private Item[] searchItemsOnApi(String item) throws IOException, CollectionException{
         Item[] itemsArray;
         String urlString = readConnectionBufferFromUrl("https://api.mercadolibre.com/sites/MLA/search?q="+item);
         Gson gson = new Gson();
@@ -112,7 +120,7 @@ public class Consummer {
         return collection;
     }
 
-    private String readConnectionBufferFromUrl(String strUrl) throws Exception {
+    private String readConnectionBufferFromUrl(String strUrl) throws IOException, CollectionException {
         URL url = new URL(strUrl);
         URLConnection urlConnection = url.openConnection();
         HttpURLConnection connection = null;
@@ -121,7 +129,7 @@ public class Consummer {
             connection.setRequestProperty("Accept", "application/json");
         } else {
             System.out.println("Url invalida");
-            throw new Exception("url invalida");
+            throw new CollectionException("url invalida para leer collection");
         }
         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         String urlString = "";
