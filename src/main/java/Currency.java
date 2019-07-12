@@ -1,7 +1,12 @@
 public class Currency {
-      private String symbol;
-      private String description;
-      private int decimal_places;
+    private String id;
+    private String symbol;
+    private String description;
+    private int decimal_places;
+
+    public String getId() { return id; }
+
+    public void setId(String id) { this.id = id; }
 
     public String getSymbol() {
         return symbol;

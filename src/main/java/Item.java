@@ -1,29 +1,14 @@
-public class Item implements Comparable<Item> {
-
-    enum ORDER {
-        PRICE_ASC,
-        PRICE_DES,
-        LISTING_TYPE_ASC,
-        LISTING_TYPE_DES;
-    }
-
-    public ORDER order = ORDER.PRICE_ASC;
-
+public class Item {
     private String id;
     private String site_id;
     private String title;
     private Float price;
     private String currency_id;
+    private Currency currency;
     private String listing_type_id;
     private String stop_time;
     private String thumbnail;
     private String[] tags;
-
-    public Item(String id, String site_id, String title, float price, String currency_id,
-                String listing_type_id, String stop_time, String thumbnail, String[] tags) {
-        super();
-
-    }
 
     public String getId() {
         return id;
@@ -55,14 +40,6 @@ public class Item implements Comparable<Item> {
 
     public void setPrice(Float price) {
         this.price = price;
-    }
-
-    public String getCurrency_id() {
-        return currency_id;
-    }
-
-    public void setCurrency_id(String currency_id) {
-        this.currency_id = currency_id;
     }
 
     public String getListing_type_id() {
@@ -97,12 +74,19 @@ public class Item implements Comparable<Item> {
         this.tags = tags;
     }
 
-    public int compareTo(Item item) {
-        return 0;
-    }
+    public String getCurrency_id() { return currency_id; }
+
+    public void setCurrency_id(String currency_id) { this.currency_id = currency_id; }
+
+    public Currency getCurrency() { return currency; }
+
+    public void setCurrency(Currency currency) { this.currency = currency; }
+
 
     @Override
     public String toString() {
         return this.title;
     }
+
+
 }
