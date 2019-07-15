@@ -20,11 +20,11 @@ Uso de la api:
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /collection/<span style="color:red">**:search/:id**</span>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **get :** Para obtener un item con el *:id* dado, en la coleccion *:search*
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **get :** Para obtener un item con el *:id* dado, en la coleccion *:search*
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **post :** Para editar el item con el *:id* dado, en la coleccion *:search*
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **post :** Para editar el item con el *:id* dado, en la coleccion *:search*
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **delete :** Para borrar el item con el *:id* dado, en la coleccion *:search*
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **delete :** Para borrar el item con el *:id* dado, en la coleccion *:search*
 
 *The postman collection:*
 
